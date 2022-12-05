@@ -84,7 +84,7 @@ jobs:
                 
   test-backend:
     docker:
-      # Docker image here
+      cimg/node:13.8.0
     steps:
        - checkout
       - restore_cache:

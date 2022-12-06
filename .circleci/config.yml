@@ -245,10 +245,11 @@ jobs:
     steps:
       # Checkout code from git
       - checkout
-      # restore backend cashe
-      - restore_cache:
-          keys: [backend-build]
       - install_awscli
+      # restore backend cashe
+      # - restore_cache:
+      #     keys: [backend-build]
+      # # - install_awscli
       - run:
           name: Run migrations
           command: |
@@ -258,10 +259,10 @@ jobs:
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
-          name: Send migration results to KVDB 
+          name: Send migration staus to kvdb.io
           command: |
-            sudo apt update
-            sudo apt install curl
+            # sudo apt update
+            # sudo apt install curl
             if grep -q "No migrations are pending" ~/project/backend/migrations_dump.txt
             then
               curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7} -k -d '1'

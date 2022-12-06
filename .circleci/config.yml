@@ -258,7 +258,7 @@ jobs:
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
-          name: Send migration results to KVDB 
+          name: Send migration to KDVB
           command: |
             sudo apt update
             sudo apt install curl
